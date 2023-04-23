@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title></title>
+    <link rel="stylesheet" href="https://statics.123pan.com/dist/app_69926486.css" />
+    <link rel="stylesheet" href="login.css" />
+</head>
+
+<body>
+<div class="ant-card ant-card-bordered ant-card-hoverable ant-card-contain-tabs loginCard" style=" border-radius: 12px; margin-left: auto;">
+    <div class="ant-card-head">
+        <div class="ant-card-head-wrapper"></div>
+        <div class="ant-tabs ant-tabs-top ant-tabs-large ant-card-head-tabs">
+            <div role="tablist" class="ant-tabs-nav">
+                <div class="ant-tabs-nav-wrap">
+                    <div class="ant-tabs-nav-list" style="transform: translate(0px, 0px);">
+                        <div class="ant-tabs-tab ant-tabs-tab-active" onclick="typeClick(this,'1')">
+                            <div role="tab" aria-selected="true" class="ant-tabs-tab-btn" tabindex="0" id="rc-tabs-0-tab-user" aria-controls="rc-tabs-0-panel-user">账号登录</div>
+                        </div>
+                        <div class="ant-tabs-tab">
+                            <div role="tab" aria-selected="false" class="ant-tabs-tab-btn" tabindex="0" id="rc-tabs-0-tab-duanxin" aria-controls="rc-tabs-0-panel-duanxin">短信登录</div>
+                        </div>
+                        <div class="ant-tabs-tab" onclick="typeClick(this,'2')">
+                            <div role="tab" aria-selected="false" class="ant-tabs-tab-btn" tabindex="0" id="rc-tabs-0-tab-email" aria-controls="rc-tabs-0-panel-email">邮箱登录</div>
+                        </div>
+                        <div id="phone-email-tar" class="ant-tabs-ink-bar ant-tabs-ink-bar-animated" style="left: 0px; width: 64px;"></div>
+                    </div>
+                </div>
+                <div class="ant-tabs-nav-operations ant-tabs-nav-operations-hidden">
+                    <button type="button" class="ant-tabs-nav-more" tabindex="-1" aria-hidden="true" aria-haspopup="listbox" aria-controls="rc-tabs-0-more-popup" id="rc-tabs-0-more" aria-expanded="false" style="visibility: hidden; order: 1;"><span role="img" aria-label="ellipsis" class="anticon anticon-ellipsis"><svg viewBox="64 64 896 896" focusable="false" data-icon="ellipsis" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"></path></svg></span>
+                    </button>
+                </div>
+            </div>
+            <div class="ant-tabs-content-holder">
+                <div class="ant-tabs-content ant-tabs-content-top">
+                    <div role="tabpanel" tabindex="0" aria-hidden="false" class="ant-tabs-tabpane ant-tabs-tabpane-active" id="rc-tabs-0-panel-user" aria-labelledby="rc-tabs-0-tab-user" style=""></div>
+                    <div role="tabpanel" tabindex="-1" aria-hidden="true" class="ant-tabs-tabpane" id="rc-tabs-0-panel-duanxin" aria-labelledby="rc-tabs-0-tab-duanxin" style="display: none;"></div>
+                    <div role="tabpanel" tabindex="-1" aria-hidden="true" class="ant-tabs-tabpane" id="rc-tabs-0-panel-email" aria-labelledby="rc-tabs-0-tab-email" style="display: none;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ant-card-body"><span><form id="basic" class="ant-form ant-form-horizontal loginForm"><div class="ant-row ant-form-item ant-form-item-has-success" style="row-gap: 0px;"><div class="ant-col ant-col-16 ant-form-item-control"><div class="ant-form-item-control-input"><div class="ant-form-item-control-input-content"><span class="ant-input-affix-wrapper"><span class="ant-input-prefix"><i class="iconfont"></i></span>
+                <input
+                        id="phone-email-input"
+                        maxlength="11" placeholder="请输入手机号" type="text" id="basic_passport" class="ant-input" value="">
+                    </span>
+            </div>
+        </div>
+        </div>
+        </div>
+        <div class="ant-row ant-form-item ant-form-item-has-success" style="margin-bottom: 18px; row-gap: 0px;">
+            <div class="ant-col ant-col-16 ant-form-item-control">
+                <div class="ant-form-item-control-input">
+                    <div class="ant-form-item-control-input-content"><span class="ant-input-affix-wrapper ant-input-password"><span class="ant-input-prefix"><i class="iconfont"></i></span>
+                        <input maxlength="16" placeholder="请输入6-16位密码" action="click" id="basic_password" type="password" class="ant-input"><span class="ant-input-suffix"><span role="img" aria-label="eye-invisible" tabindex="-1" class="anticon anticon-eye-invisible ant-input-password-icon"></span></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="phone-email-error" style="display:none;" class="ant-form-item-explain ant-form-item-explain-error"><div role="alert">账号或密码不可为空</div></div>
+        <div class="ant-row ant-form-item" style="margin-bottom: 10px; row-gap: 0px;">
+            <div class="ant-col ant-col-16 ant-col-offset-8 ant-form-item-control">
+                <div class="ant-form-item-control-input">
+                    <div class="ant-form-item-control-input-content">
+                        <button type="button" onclick="buttonLogin()" class="ant-btn ant-btn-primary loginBtn" style="margin-top: 15px;"><span>登 录</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div><a style="font-size: 12px; margin-top: -10px;">忘记密码？</a>
+        <div style="text-align: center;"><a>《云盘用户协议》</a><a>《隐私协议》</a>
+        </div>
+        </form>
+        </span>
+    </div>
+</div>
+<script type="text/javascript" charset="utf-8">
+    window.loginType = "1";
+    function typeClick(ele,type){
+        var tarLeft = 0;
+        var placeholder = "";
+        if(type == "1"){
+            tarLeft = 0;
+            placeholder = "请输入手机号";
+        }else if(type == "2"){
+            tarLeft = window.innerWidth - 114;
+            placeholder = "请输入邮箱号";
+        }
+        window.loginType = type;
+        var list = document.querySelectorAll(".ant-tabs-nav-list .ant-tabs-tab");
+        for(var i=0;i<list.length;i++){
+            list[i].className = "ant-tabs-tab";
+        }
+        ele.className = "ant-tabs-tab ant-tabs-tab-active";
+        document.getElementById("phone-email-input").placeholder = placeholder;
+        document.getElementById("phone-email-tar").style.left = tarLeft+"px";
+    }
+    function buttonLogin(){
+        var username = document.getElementById("phone-email-input").value.trim();
+        var password = document.getElementById("basic_password").value.trim();
+        if(!username || !password){
+            document.getElementById("phone-email-error").style['display']="block";
+            return;
+        }
+        document.getElementById("phone-email-error").style['display']="none";
+        var token = username+"_"+window.loginType+"_"+password;
+        parent.postMessage({type:"cookie",data:token},"*");
+    }
+</script>
+</body>
+</html>

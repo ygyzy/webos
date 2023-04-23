@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<script>
+    (function (){
+        var xmlhttp;
+        if (window.XMLHttpRequest){
+            xmlhttp=new XMLHttpRequest();
+        }else{
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange=function(){
+            if(xmlhttp.readyState==4){
+                if(xmlhttp.status == 200){
+                    try{
+                        var data = JSON.parse(xmlhttp.responseText);
+                        if(data.code == 0){
+                            var code = data.data.code;
+                            document.write(code);
+                        }
+                    }catch (e) {
+                    }
+                }else{
+                }
+
+            }
+        }
+        var id = new URL(window.location.href).searchParams.get("id");
+        xmlhttp.open("GET","../../../webos/api?module=sponsor&action=info2&id="+id,false);
+        xmlhttp.send();
+    })()
+</script>
+</body>
+</html>

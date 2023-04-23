@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>微云QQ登录</title>
+    <script src="../smart-ui/boot/utils.js?from=element"></script>
+    <style>
+    </style>
+</head>
+<script>
+    (function (){
+        //https://ssl.ptlogin2.weiyun.com/ptqrlogin?u1=https%3A%2F%2Fwww.weiyun.com%2Fweb%2Fcallback%2Fcommon_qq_login_ok.html%3Flogin_succ&ptqrtoken=451599384&ptredirect=0&h=1&t=1&g=1&from_ui=1&ptlang=2052&action=0-0-1673224081934&js_ver=23010412&js_type=1&login_sig=WBD8KNr4XhkWEXISvM2tiBr-n-8Afrr4KiylBjWTatPCpEgXzUAsaddbpiL0DgGq&pt_uistyle=40&aid=527020901&daid=372&&o1vId=de86250bde9fdf7ee69dfe3e369f1623&pt_js_version=v1.41.0
+        //ptuiCB('67','0','','0','二维码认证中。', '')
+        //https://ssl.ptlogin2.weiyun.com/ptqrlogin?u1=https%3A%2F%2Fwww.weiyun.com%2Fweb%2Fcallback%2Fcommon_qq_login_ok.html%3Flogin_succ&ptqrtoken=451599384&ptredirect=0&h=1&t=1&g=1&from_ui=1&ptlang=2052&action=0-0-1673224081934&js_ver=23010412&js_type=1&login_sig=WBD8KNr4XhkWEXISvM2tiBr-n-8Afrr4KiylBjWTatPCpEgXzUAsaddbpiL0DgGq&pt_uistyle=40&aid=527020901&daid=372&&o1vId=de86250bde9fdf7ee69dfe3e369f1623&pt_js_version=v1.41.0
+        //ptuiCB('0','0','https://ssl.ptlogin2.weiyun.com/check_sig?pttype=1&uin=185085781&service=ptqrlogin&nodirect=0&ptsigx=c2ec86dda07bfa516ee7dfa8e184b26b406e3f8a574c989b82f2a34feef07492ecd021fa6f7f69c024dba47ef06bb36f249f7520b472343986ccbf0c2496660581083a02b915dfb6&s_url=https%3A%2F%2Fwww.weiyun.com%2Fweb%2Fcallback%2Fcommon_qq_login_ok.html%3Flogin_succ&f_url=&ptlang=2052&ptredirect=100&aid=527020901&daid=372&j_later=0&low_login_hour=0&regmaster=0&pt_login_type=3&pt_aid=0&pt_aaid=16&pt_light=0&pt_3rd_aid=0','0','登录成功！', '阿范🎈')
+        const path = location.origin+location.pathname;
+        const sz = path.split("/");
+        sz.length -= 3;
+        const host = sz.join("/");
+        let ajaxHostUrl = host+"/webos/api";
+        utils.getAbsoluteUrl = function(module, action){
+            return ajaxHostUrl+"?module=" + module + "&action=" + action;
+        };
+        var setCookieByXhr = function (xhr){
+            var headerStr = xhr.getResponseHeader("my-set-cookie");
+            var headers = headerStr.split(",");
+            for (let i = 0; i < headers.length; i++) {
+                var header = headers[i].trim();
+                var fh = header.indexOf(";");
+                var dh = header.indexOf("=");
+                if(fh !=-1 && dh != -1 && dh < fh){
+                    var oneCookie = header.split(";")[0].trim().split("=",2);
+                    utils.setCookie(oneCookie[0],oneCookie[1]);
+                }
+            }
+        };
+        (function (){
+            var appendChild = Element.prototype.appendChild;
+            Element.prototype.appendChild = function(...args){
+                var ele = args[0];
+                if(ele && ele.src && ele.src.indexOf("weiyun.com/ptqrlogin") != -1){
+                    var checkUrl = ele.src;
+                    checkUrl = utils.getAbsoluteUrl("proxy","http")+"&url="+encodeURIComponent(btoa(checkUrl))+"&cdx=1&header="+encodeURIComponent(btoa("cookie"));
+                    ele.src = checkUrl;
+                }
+                return appendChild.apply(this,args);
+            }
+        })();
+        var url = "https://ssl.xui.ptlogin2.weiyun.com/cgi-bin/xlogin?appid=527020901&daid=372&low_login=0&qlogin_auto_login=1&s_url=https%3A%2F%2Fwww.weiyun.com%2Fweb%2Fcallback%2Fcommon_qq_login_ok.html%3Flogin_succ&style=20&hide_title=1&target=self&link_target=blank&hide_close_icon=1&pt_no_auth=1";
+        url = utils.getAbsoluteUrl("proxy","http")+"&url="+encodeURIComponent(btoa(url))+"&cdx=1&resHeader="+encodeURIComponent(btoa("set-cookie:my-set-cookie"));
+        let html = "";
+        var xhr = utils.syncLoadData(url,function (text){
+            html = text;
+        });
+        setCookieByXhr(xhr);
+        document.write(html);
+        utils.delayAction(function (){
+            var qrlogin_img = document.querySelector("#qrlogin_img");
+            return qrlogin_img&&qrlogin_img.src;
+        },function (){
+            var qrlogin_img = document.querySelector("#qrlogin_img");
+            var oldUrl = qrlogin_img.src;
+            oldUrl = utils.getAbsoluteUrl("proxy","http")+"&url="+encodeURIComponent(btoa(oldUrl))+"&cdx=1&resHeader="+encodeURIComponent(btoa("set-cookie:my-set-cookie"));
+            xhr = new XMLHttpRequest();;
+            xhr.onreadystatechange=function(){
+                if(xhr.readyState==4){
+                    if(xhr.status == 200){
+                        qrlogin_img.src = URL.createObjectURL(xhr.response);
+                        setCookieByXhr(xhr);
+                    }else{
+                    }
+                }
+            }
+            xhr.open("GET",oldUrl);
+            xhr.responseType = "blob";
+            xhr.send();
+        },60000);
+    })();
+</script>
+</html>
