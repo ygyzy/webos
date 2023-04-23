@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>加载中...</title>
+</head>
+<body>
+加载中...
+</body>
+<script>
+    (function (){
+        let deviceType = "other";
+        if(/iphone|ipad|android|mobile|ipod|phone/i.test(navigator.userAgent)){
+            deviceType = "mobile";
+        }else if(/mac os/i.test(navigator.userAgent)){
+            deviceType = "mac";
+        }else if(/windows/i.test(navigator.userAgent)){
+            deviceType = "windows";
+        }else if(/linux/i.test(navigator.userAgent)){
+            deviceType = "linux";
+        }
+        var url;
+        if(deviceType == "mobile"){
+            url = "mobile.html";
+        }else{
+            var pcUi = localStorage.getItem("pcUi");
+            if(!pcUi){
+                pcUi = "win11";
+            }
+            url = pcUi + ".html";
+        }
+        var count = 0;
+        new URL(window.location.href).searchParams.forEach(function(val,key){
+            url += count == 0?"?":"&";
+            url += key+"="+encodeURIComponent(val);
+            count++;
+        });
+        location.href= url;
+    })()
+</script>
+</html>
